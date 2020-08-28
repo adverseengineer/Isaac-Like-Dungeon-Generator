@@ -7,25 +7,22 @@ public class Main
 {
 	public static void main(String[] args)
 	{
-		Toolkit.init();
+		Runtime.getRuntime().addShutdownHook(new Thread()
+		{
+			public void run()
+			{
+				Toolkit.shutdown();
+				System.err.println("JVM was forcibly terminated");
+			}
+		});
 
-		DungeonLayout dungeon;
+		Toolkit.init();
 
 		while(true)
 		{
-
 			Toolkit.clearScreen(new CharColor(CharColor.NORMAL,CharColor.NORMAL));
-
-			dungeon = new DungeonLayout(11,11,7,0.1f,0.2f,0.2f);
-
-			DungeonPainter.paint(dungeon);
-
-			InputChar ic = Toolkit.readCharacter();
-			if(!ic.isSpecialCode() && ic.getCode() == '\t')
-			{
-				Toolkit.shutdown();
-				break;
-			}
+			DungeonPainter.paint(new DungeonLayout(11,11,7,0.1f,0.2f,0.2f));
+			Toolkit.readCharacter();
 		}
 	}
 

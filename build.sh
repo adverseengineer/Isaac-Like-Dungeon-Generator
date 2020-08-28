@@ -24,6 +24,3 @@ then
 		chmod +x "Main.jar"
 	fi
 fi
-
-rm debug.log
-java -jar Main.jar $1 $2 $3
