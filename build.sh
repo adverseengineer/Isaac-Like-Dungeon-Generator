@@ -15,4 +15,6 @@ cd .. &&
 #delete all the old class files
 rm -r bin/** &&
 #make the jar executable
-chmod +x Main.jar
+chmod +x Main.jar &&
+#all clear
+echo "Project built!"
