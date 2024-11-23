@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Random;
 
 public class DungeonLayout
 {
@@ -47,7 +46,8 @@ public class DungeonLayout
 		{
 			//if the room passes the keep check and the space is not already taken (is zero)
 			//NOTE: the chance to keep the room decreases gradually to zero, inversely proportional to the number of iterations that have passed 
-			if(Util.randomFloat(0,1) < Util.lerp(0,1,1f*currentIteration/numberOfIterations) && roomData[adjacentRoom[1]][adjacentRoom[0]] == 0)
+			float chance = 1f * currentIteration / numberOfIterations;
+			if(Util.randomFloat(0,1) < chance && roomData[adjacentRoom[1]][adjacentRoom[0]] == 0)
 			{
 				//add the room to the map
 				setRoom(currentIteration - 1, adjacentRoom[0], adjacentRoom[1]);

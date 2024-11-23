@@ -6,8 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
-public class Util
-{
+public class Util {
+
 	private static final Random rand = new Random(System.currentTimeMillis());
 
 	public static final String ANSI_RESET = "\033[0m";
@@ -20,72 +20,52 @@ public class Util
     public static final String ANSI_CYAN = "\033[0;36m";
     public static final String ANSI_WHITE = "\033[0;37m";
 
-	public static final void setSeed(long seed)
-	{
+	public static final void setSeed(long seed) {
 		rand.setSeed(seed);
 	}
 
-	public static final int randomInt(int min, int max)
-	{
-		return rand.nextInt() * (max - min) + min;
+	//inclusive min, exclusive max
+	public static final int randomInt(int min, int max) {
+		return rand.nextInt(max - min) + min;
 	}
 
-	public static final float randomFloat(float min, float max)
-	{
+	public static final float randomFloat(float min, float max) {
 		return rand.nextFloat() * (max - min) + min;
 	}
 
-	public static final double randomDouble(double min, double max)
-	{
-		return rand.nextDouble() * (max - min) + min;
-	}
-
-	public static final boolean randomBoolean()
-	{
-		return rand.nextBoolean();
-	}
-
-	public static final float lerp(float a, float b, float t)
-	{
+	public static final float lerp(float a, float b, float t) {
 		return (b - a) * t + a;
 	}
 
-	public static boolean isColorSupported()
-	{
+	public static boolean isColorSupported() {
 		return !System.getProperty("os.name").toLowerCase().startsWith("win");
 	}
 
-	public static String colorText(String text, String color)
-	{
+	public static String colorText(String text, String color) {
 		if(isColorSupported())
 			return color + text + ANSI_RESET;
 		else
 			return text;
 	}
 
-	public static final void pause(long milliseconds)
-	{
-		try
-		{
+	public static final void pause(long milliseconds) {
+		try {
 			Thread.sleep(milliseconds);
-		}catch(InterruptedException ex){}
+		} catch (InterruptedException ex){}
 	}
 	
-	public static final void log(String line)
-	{
+	public static final void log(String line) {
 		log("debug.log",line);
 	}
 
-	public static final void log(String path, String line)
-	{
-		try
-		{	
+	public static final void log(String path, String line) {
+		try {	
 			PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(path,true)));
 			String timeStamp = new SimpleDateFormat("[yyyy.MM.dd.HH.mm.ss]").format(new Date());
 
 			writer.println(timeStamp + " " + line);
 			writer.close();
 		}
-		catch(IOException ex){}	
+		catch (IOException ex){}	
 	}
 }
